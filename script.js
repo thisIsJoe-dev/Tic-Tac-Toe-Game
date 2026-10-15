@@ -1,5 +1,6 @@
 const boardEl = document.getElementById('board');
 const statusEl = document.getElementById('status');
+const restartBtn = document.getElementById('restart');
 
 let board = Array(9).fill('');
 let currentPlayer = 'X';
@@ -32,7 +33,7 @@ function handleClick(e) {
   e.target.disabled = true;
 
   if (checkWinner(currentPlayer)) {
-    statusEl.textContent = `${currentPlayer} is Winner`;
+    statusEl.textContent = ` ${currentPlayer} is Winner`;
     gameOver = true;
     return;
   }
@@ -44,7 +45,7 @@ function handleClick(e) {
   }
 
   currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-  statusEl.textContent = `turn: ${currentPlayer}`;
+  statusEl.textContent = `Turn: ${currentPlayer}`;
 }
 
 function checkWinner(player) {
@@ -53,4 +54,13 @@ function checkWinner(player) {
   );
 }
 
+function restart() {
+  board = Array(9).fill('');
+  currentPlayer = 'X';
+  gameOver = false;
+  statusEl.textContent = 'Turn: X';
+  createBoard();
+}
+
+restartBtn.addEventListener('click', restart);
 createBoard();
